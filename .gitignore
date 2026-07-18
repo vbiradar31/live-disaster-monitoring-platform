@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
+*.pyc
+ingestion\test_db.py
 
 # Environment
 .env
