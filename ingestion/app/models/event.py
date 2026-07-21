@@ -1,5 +1,6 @@
 from datetime import datetime, UTC
-from uuid import UUID, uuid7
+from uuid import UUID
+from uuid6 import uuid7
 
 from sqlalchemy import (
     DateTime,
