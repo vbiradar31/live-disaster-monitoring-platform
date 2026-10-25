@@ -1,0 +1,19 @@
+# Disposable PostgreSQL used only by tests. It has no host data volume and
+# publishes on a separate loopback-only port from the application Compose file.
+services:
+  postgres-integration:
+    image: postgres:17
+    container_name: ldmp-postgres-integration-test
+    ports:
+      - "127.0.0.1:55432:5432"
+    environment:
+      POSTGRES_USER: ldmp_test
+      POSTGRES_PASSWORD: ldmp_test_only
+      POSTGRES_DB: postgres
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ldmp_test -d postgres"]
+      interval: 2s
+      timeout: 3s
+      retries: 30

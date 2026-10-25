@@ -5,7 +5,9 @@ from uuid6 import uuid7
 from sqlalchemy import (
     DateTime,
     ForeignKey,
+    Index,
     Integer,
+    JSON,
     String,
     Text,
 )
@@ -17,6 +19,7 @@ from app.database import Base
 
 class Event(Base):
     __tablename__ = "events"
+    __table_args__ = (Index("ix_events_legacy_identity", "legacy_source", "legacy_external_id"),)
 
     id: Mapped[UUID] = mapped_column(
         PG_UUID(as_uuid=True),
@@ -24,16 +27,12 @@ class Event(Base):
         default=uuid7,
     )
 
-    external_id: Mapped[str] = mapped_column(
+    legacy_external_id: Mapped[str | None] = mapped_column(
         String(200),
-        unique=True,
-        index=True,
-        nullable=False,
     )
 
-    source: Mapped[str] = mapped_column(
+    legacy_source: Mapped[str | None] = mapped_column(
         String(50),
-        nullable=False,
     )
 
     title: Mapped[str] = mapped_column(
@@ -79,7 +78,6 @@ class Event(Base):
         order_by="EventEpisode.episode_number",
     )
 
-
 class EventGeometry(Base):
     __tablename__ = "event_geometries"
 
@@ -101,7 +99,7 @@ class EventGeometry(Base):
     )
 
     geometry_json: Mapped[dict] = mapped_column(
-        JSONB,
+        JSONB().with_variant(JSON(), "sqlite"),
         nullable=False,
     )
 
@@ -152,4 +150,8 @@ class EventEpisode(Base):
 
     event: Mapped["Event"] = relationship(
         back_populates="episodes"
+    )
+
+    observation_links: Mapped[list["EpisodeObservation"]] = relationship(
+        back_populates="episode", passive_deletes="all"
     )

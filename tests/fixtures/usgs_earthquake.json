@@ -1,0 +1,19 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 6.8,
+        "place": "Near the east coast of Honshu, Japan",
+        "time": 1792854756000,
+        "updated": 1792858356000,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000test",
+        "type": "earthquake",
+        "title": "M 6.8 - Near the east coast of Honshu, Japan"
+      },
+      "geometry": {"type": "Point", "coordinates": [142.369, 38.322, 24.0]},
+      "id": "us7000test"
+    }
+  ]
+}

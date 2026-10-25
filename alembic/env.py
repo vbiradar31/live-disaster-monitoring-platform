@@ -9,7 +9,10 @@ from alembic import context
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(PROJECT_ROOT/"ingestion"))
+APP_ROOT = PROJECT_ROOT / "ingestion"
+if not (APP_ROOT / "app").is_dir():
+    APP_ROOT = PROJECT_ROOT
+sys.path.insert(0, str(APP_ROOT))
 
 from app.config import settings
 from app.database import Base

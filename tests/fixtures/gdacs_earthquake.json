@@ -1,0 +1,18 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [142.369, 38.322]},
+      "properties": {
+        "eventid": 1476137,
+        "episodeid": 1632460,
+        "eventtype": "EQ",
+        "eventname": "Earthquake in Japan",
+        "fromdate": "2026-10-24T15:12:36Z",
+        "todate": "2026-10-24T15:12:36Z",
+        "severitydata": {"severity": 6.8, "severityunit": "M", "severitytext": "Magnitude 6.8M"}
+      }
+    }
+  ]
+}
