@@ -1,3 +1,5 @@
+"""Create the shared SQLAlchemy engine and request-scoped database sessions."""
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 
@@ -5,7 +7,7 @@ from app.config import settings
 
 
 engine = create_engine(
-    settings.database_url,
+    settings.sqlalchemy_url(),
     echo=True,
     pool_pre_ping=True,
 )
@@ -20,6 +22,7 @@ class Base(DeclarativeBase):
     pass
 
 def get_db():
+    """Yield one session per request and close it after the request completes."""
     db = SessionLocal()
     try:
         yield db
